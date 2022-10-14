@@ -1,10 +1,10 @@
-import * as React from 'react';
-import { CssVarsProvider, useColorScheme } from '@mui/joy/styles';
-import Sheet from '@mui/joy/Sheet';
-import Typography from '@mui/joy/Typography';
-import TextField from '@mui/joy/TextField';
-import Button from '@mui/joy/Button';
-import Link from '@mui/joy/Link';
+import * as React from "react";
+import { CssVarsProvider, useColorScheme } from "@mui/joy/styles";
+import Sheet from "@mui/joy/Sheet";
+import Typography from "@mui/joy/Typography";
+import TextField from "@mui/joy/TextField";
+import Button from "@mui/joy/Button";
+import Link from "@mui/joy/Link";
 
 function ModeToggle() {
   const { mode, setMode } = useColorScheme();
@@ -23,13 +23,13 @@ function ModeToggle() {
     <Button
       variant="outlined"
       onClick={() => {
-        setMode(mode === 'light' ? 'dark' : 'light');
+        setMode(mode === "light" ? "dark" : "light");
       }}
     >
-      {mode === 'light' ? 'Turn dark' : 'Turn light'}
+      {mode === "light" ? "Turn dark" : "Turn light"}
     </Button>
   );
-} 
+}
 
 export default function App() {
   return (
@@ -39,15 +39,15 @@ export default function App() {
         <Sheet
           sx={{
             width: 300,
-            mx: 'auto', // margin left & right
+            mx: "auto", // margin left & right
             my: 4, // margin top & botom
             py: 3, // padding top & bottom
             px: 2, // padding left & right
-            display: 'flex',
-            flexDirection: 'column',
+            display: "flex",
+            flexDirection: "column",
             gap: 2,
-            borderRadius: 'sm',
-            boxShadow: 'md',
+            borderRadius: "sm",
+            boxShadow: "md",
           }}
           variant="outlined"
         >
@@ -75,7 +75,7 @@ export default function App() {
           <Typography
             endDecorator={<Link href="/sign-up">Sign up</Link>}
             fontSize="sm"
-            sx={{ alignSelf: 'center' }}
+            sx={{ alignSelf: "center" }}
           >
             Don&apos;t have an account?
           </Typography>

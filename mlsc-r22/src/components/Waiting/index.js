@@ -1,10 +1,8 @@
-import React from 'react'
-import styles from './waiting.module.css'
+import React from "react";
+import styles from "./waiting.module.css";
 
 const Waiting = () => {
-  return (
-    <div>waiting page</div>
-  )
-}
+  return <div>waiting page</div>;
+};
 
-export default Waiting
+export default Waiting;
