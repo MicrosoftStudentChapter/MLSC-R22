@@ -1,8 +1,8 @@
 import * as React from "react";
 import "./landing.css";
-import Lottie from "lottie-react";
+// import Lottie from "lottie-react";
 import Login from "./login";
-import exam from "./exam.json";
+// import exam from "./exam.json";
 
 
 export default function App() {

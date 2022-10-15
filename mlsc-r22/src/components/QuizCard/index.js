@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -28,6 +28,8 @@ function QuizCard({ ques, setSelOption, selOption, active, setActive }) {
                         '&.Mui-focused': {
                             color: 'white',
                         },
+                        fontFamily: 'Poppins',
+                        fontWeight: 'bolder'
                     }}
                 >{ques.question}
                 </FormLabel>
@@ -49,6 +51,8 @@ function QuizCard({ ques, setSelOption, selOption, active, setActive }) {
                             border: '1px solid white',
                             marginBottom: '10px',
                             borderRadius: '5px',
+                            fontFamily: 'Poppins',
+                            fontWeight: 'bolder'
                         }} />
                     ))}
                 </RadioGroup>
