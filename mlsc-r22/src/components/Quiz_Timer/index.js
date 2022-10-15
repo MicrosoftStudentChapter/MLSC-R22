@@ -6,13 +6,15 @@ import styles from './quiztimer.module.css'
 const Quiz_Timer = ({ submit }) => {
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
+  const [checked, setChecked] = useState(false)
 
-  // const deadline = new Date(Date.now() + 15 * 60000);
-  const deadline = new Date(Date.now() + 60000);
-  // const deadline = Date.now()
-  // deadline.setMinutes(deadline.getMinutes() + 15)
+  const deadline = new Date(Date.now() + 15 * 60000);
 
   const getTime = () => {
+    if ((localStorage.getItem("startTime") !== null || localStorage.getItem('startTime') !== undefined) && !checked) {
+      var deadline = new Date(parseInt(localStorage.getItem("startTime", Date.now())) + 15 * 60000)
+      setChecked(true)
+    }
     const time = Date.parse(deadline) - Date.now();
     if (time <= 0) {
       submit();
@@ -24,12 +26,13 @@ const Quiz_Timer = ({ submit }) => {
 
 
   useEffect(() => {
+    if (localStorage.getItem("startTime") === null || localStorage.getItem('startTime') === undefined) {
+      localStorage.setItem("startTime", Date.now())
+    }
     const interval = setInterval(() => getTime(deadline), 1000);
     if (minutes === 0)
       return () => clearInterval(interval);
   }, []);
-
-
 
   return (
     <div className={styles.timer} role="timer">

@@ -6,6 +6,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import './quiz.module.css';
 import Quiz_Timer from '../Quiz_Timer';
+import axios from 'axios'
 
 const Questions = [{
   question: 'Question 1: Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quisquam officia autem at deleniti quod culpa repudiandae explicabo eius atque, sit, odit, corporis nesciunt voluptatum consectetur sapiente harum voluptas qui sint quas numquam? Eum officia error corporis dignissimos molestiae impedit quo! ',
@@ -85,8 +86,16 @@ const Quiz = () => {
   }
 
   const submit = () => {
-    // alert("Submit hogaya chutiye, ab jake mara!")
-    window.location.href = "https://youtube.com/watch?v=_lL2nlOzEQ8";
+    // axios.post("http://localhost:10000/data", { Questions })
+    //   .then((res) => console.log(res))
+    //   .catch((err) => console.log(err))
+    fetch("http://localhost:10000/data", {
+      method: "POST",
+      body: Questions
+    })
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err))
+    // window.location.href = "https://youtube.com/watch?v=_lL2nlOzEQ8";
   }
 
   return (
@@ -100,7 +109,6 @@ const Quiz = () => {
           minWidth: '600px',
           width: '70%',
           margin: 'auto',
-          marginTop: '13%',
           position: 'relative',
           padding: '2%',
           borderBottomLeftRadius: '20px',
