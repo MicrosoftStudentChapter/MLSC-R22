@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 import QuizCard from '../QuizCard/index';
@@ -36,6 +36,10 @@ const Quiz = () => {
   const [selOption, setSelOption] = useState('');
   const [active, setActive] = useState('');
 
+  useEffect(() => {
+    setActive(selOption);
+  }, [selOption])
+
   const nextIndex = () => {
     setPrevBtnState('contained');
     setNextBtnState('contained');
@@ -43,7 +47,6 @@ const Quiz = () => {
     if (index < Questions.length - 1) {
       setSelOption(Questions[index + 1].selected.length !== 0 ? Questions[index + 1].selected : '');
       setIndex(index + 1);
-      setActive(selOption);
     }
     else if (index === Questions.length - 1) {
       setNextBtnState('disabled');
@@ -57,7 +60,6 @@ const Quiz = () => {
     if (index > 0) {
       setSelOption(Questions[index - 1].selected.length !== 0 ? Questions[index - 1].selected : '')
       setIndex(index - 1);
-      setActive(selOption);
     }
     else {
       setPrevBtnState('disabled');
@@ -89,13 +91,12 @@ const Quiz = () => {
             left: '30px',
             width: '100px',
             color: 'white',
+            fontFamily: 'Poppins',
+            fontWeight: 'bold',
             opacity: '.8',
             ":hover": {
               opacity: '1'
             },
-            ":disabled": {
-              border: '1px solid white'
-            }
           }}>Previous</Button>
 
           <Button variant={nextBtnState} size="medium" className='next__button' onClick={nextIndex} sx={{
@@ -103,6 +104,11 @@ const Quiz = () => {
             bottom: '30px',
             right: '30px',
             width: '90px',
+            fontFamily: 'Poppins',
+            fontWeight: 'bold',
+            ":hover": {
+              opacity: '1'
+            },
           }}>Next</Button>
         </Box>
       </Container>

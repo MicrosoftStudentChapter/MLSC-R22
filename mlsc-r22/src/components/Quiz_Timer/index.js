@@ -8,7 +8,7 @@ const Quiz_Timer = () => {
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
 
-  const deadline = "October, 15, 2022, 19:00:00";
+  const deadline = new Date(Date.now() + 15.03 * 60000);
 
   const getTime = () => {
     const time = Date.parse(deadline) - Date.now();
