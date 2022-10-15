@@ -1,38 +1,34 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&display=swap");
 
-*{
-    overflow: hidden;
+* {
+  /* overflow: hidden; */
 }
 
-.wrapper{
-    background-color: #1A2027;
+.wrapper {
+  background-color: #1a2027;
 }
 
-
-
-.dummy{
-    font: 100;
+.dummy {
+  font: 100;
 }
 
-.glass{
-    z-index: 100;
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    width: 50vw;
-    background: rgba(255, 255, 255, 0);
-    /* background: black; */
-	/* -webkit-backdrop-filter: blur(10px); */
-	backdrop-filter: blur(5px);
+.glass {
+  z-index: 100;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 50vw;
+  background: rgba(255, 255, 255, 0);
+  /* background: black; */
+  /* -webkit-backdrop-filter: blur(10px); */
+  backdrop-filter: blur(5px);
 }
 
-.live{
-    
-    display: flex;
-    gap: 10px;
-    justify-content: center;
+.live {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
 }
-

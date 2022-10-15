@@ -6,6 +6,7 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import styles from './quizcard.module.css';
 import { useEffect } from 'react';
+import Logo from '../../images/img.jpeg'
 
 function QuizCard({ ques, setSelOption, selOption, active, setActive }) {
 
@@ -43,6 +44,16 @@ function QuizCard({ ques, setSelOption, selOption, active, setActive }) {
                     }}
                 >{ques.question}
                 </FormLabel>
+
+                {/* Sample Image */}
+                <img style={{
+                    width: '80%',
+                    margin: 'auto',
+                    marginBottom: '3%'
+                }}
+                    src="https://bobbyhadz.com/images/blog/react-prevent-multiple-button-clicks/thumbnail.webp"
+                    alt="car"
+                />
 
                 <RadioGroup
                     aria-labelledby="demo-radio-buttons-group-label"

@@ -109,7 +109,6 @@ const Quiz = () => {
           minWidth: '600px',
           width: '70%',
           margin: 'auto',
-          marginTop: '13%',
           position: 'relative',
           padding: '2%',
           borderBottomLeftRadius: '20px',

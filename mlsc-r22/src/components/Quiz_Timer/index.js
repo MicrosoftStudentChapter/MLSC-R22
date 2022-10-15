@@ -34,10 +34,6 @@ const Quiz_Timer = ({ submit }) => {
       return () => clearInterval(interval);
   }, []);
 
-  useEffect(() => { console.log(deadline) }, [deadline])
-
-
-
   return (
     <div className={styles.timer} role="timer">
       <div className={styles.col_4}>
