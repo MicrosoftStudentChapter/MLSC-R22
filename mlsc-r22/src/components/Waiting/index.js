@@ -56,7 +56,7 @@ const Waiting = () => {
                     
                     }}>
                         
-                      <img src={bg} loading="lazy" alt="bg_img" />
+                      <img src={bg} loading="lazy" alt="bg_img" className={styles.backImg} />
                       <div className={styles.glass}>
                         <Waiting_Timer/>
                       </div>
