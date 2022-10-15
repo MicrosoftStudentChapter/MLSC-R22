@@ -1,86 +1,102 @@
 import * as React from "react";
-import { CssVarsProvider, useColorScheme } from "@mui/joy/styles";
-import Sheet from "@mui/joy/Sheet";
-import Typography from "@mui/joy/Typography";
-import TextField from "@mui/joy/TextField";
-import Button from "@mui/joy/Button";
-import Link from "@mui/joy/Link";
 
-function ModeToggle() {
-  const { mode, setMode } = useColorScheme();
-  const [mounted, setMounted] = React.useState(false);
+import "./landing.css";
+import Lottie from "lottie-react";
+import Login from "./login";
+import exam from "./exam.json";
 
-  // necessary for server-side rendering
-  // because mode is undefined on the server
-  React.useEffect(() => {
-    setMounted(true);
-  }, []);
-  if (!mounted) {
-    return null;
-  }
 
-  return (
-    <Button
-      variant="outlined"
-      onClick={() => {
-        setMode(mode === "light" ? "dark" : "light");
-      }}
-    >
-      {mode === "light" ? "Turn dark" : "Turn light"}
-    </Button>
-  );
-}
 
 export default function App() {
+  const [compShow, setCompShow] = React.useState(false);
+
+  const handleClick = () => {
+    setCompShow(true);
+  };
+
+
   return (
-    <CssVarsProvider>
-      <main>
-        <ModeToggle />
-        <Sheet
-          sx={{
-            width: 300,
-            mx: "auto", // margin left & right
-            my: 4, // margin top & botom
-            py: 3, // padding top & bottom
-            px: 2, // padding left & right
-            display: "flex",
-            flexDirection: "column",
-            gap: 2,
-            borderRadius: "sm",
-            boxShadow: "md",
-          }}
-          variant="outlined"
-        >
-          <div>
-            <Typography level="h4" component="h1">
-              <b>Welcome!</b>
-            </Typography>
-            <Typography level="body2">Sign in to continue.</Typography>
-          </div>
-          <TextField
-            // html input attribute
-            name="email"
-            type="email"
-            placeholder="johndoe@email.com"
-            // pass down to FormLabel as children
-            label="Email"
-          />
-          <TextField
-            name="password"
-            type="password"
-            placeholder="password"
-            label="Password"
-          />
-          <Button sx={{ mt: 1 /* margin top */ }}>Log in</Button>
-          <Typography
-            endDecorator={<Link href="/sign-up">Sign up</Link>}
-            fontSize="sm"
-            sx={{ alignSelf: "center" }}
-          >
-            Don&apos;t have an account?
-          </Typography>
-        </Sheet>
-      </main>
-    </CssVarsProvider>
+    <>
+      <div className="container">
+        <svg viewBox="0 0 1250 200">
+          <symbol id="s-text">
+            <text text-anchor="middle" x="50%" y="80%">
+              MLSC Recruitment quiz
+            </text>
+          </symbol>
+
+          <g class="g-ants">
+            <use xlinkHref="#s-text" className="text-copy"></use>
+            <use xlinkHref="#s-text" className="text-copy"></use>
+            <use xlinkHref="#s-text" className="text-copy"></use>
+            <use xlinkHref="#s-text" className="text-copy"></use>
+            <use xlinkHref="#s-text" className="text-copy"></use>
+            <use xlinkHref="#s-text" className="text-copy"></use>
+          </g>
+        </svg>
+        <button onClick={handleClick} className="buttonlogin">
+          LOGIN
+        </button>
+        {compShow && <Login />}
+        
+      <Timer />
+      </div>
+    </>
   );
 }
+
+
+const Timer = () => {
+  const [days, setDays] = React.useState(0);
+  const [hours, setHours] = React.useState(0);
+  const [minutes, setMinutes] = React.useState(0);
+  const [seconds, setSeconds] = React.useState(0);
+
+  const deadline = "16 October 2022 08:20:00 PM";
+
+  const getTime = () => {
+    const time = Date.parse(deadline) - Date.now();
+
+    setDays(Math.floor(time / (1000 * 60 * 60 * 24)));
+    setHours(Math.floor((time / (1000 * 60 * 60)) % 24));
+    setMinutes(Math.floor((time / 1000 / 60) % 60));
+    setSeconds(Math.floor((time / 1000) % 60));
+  };
+
+  React.useEffect(() => {
+    const interval = setInterval(() => getTime(deadline), 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+
+  return (
+    <div className="timer" role="timer">
+      <div className="col-4">
+        <div className="box">
+          <p id="day">{days < 10 ? "0" + days : days}</p>
+          <span className="text">Days</span>
+        </div>
+      </div>
+      <div className="col-4">
+        <div className="box">
+          <p id="hour">{hours < 10 ? "0" + hours : hours}</p>
+          <span className="text">Hours</span>
+        </div>
+      </div>
+      <div className="col-4">
+        <div className="box">
+          <p id="minute">{minutes < 10 ? "0" + minutes : minutes}</p>
+          <span className="text">Minutes</span>
+        </div>
+      </div>
+      <div className="col-4">
+        <div className="box">
+          <p id="second">{seconds < 10 ? "0" + seconds : seconds}</p>
+          <span className="text">Seconds</span>
+        </div>
+      </div>
+    </div>
+
+  );
+};
