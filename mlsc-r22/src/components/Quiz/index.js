@@ -36,19 +36,36 @@ const Quiz = () => {
   const [selOption, setSelOption] = useState('');
   const [active, setActive] = useState('');
 
+  const [subNow, setSubNow] = useState(false);
+
   useEffect(() => {
     setActive(selOption);
   }, [selOption])
 
+  useEffect(() => {
+    if (localStorage.getItem('questionData') === null || localStorage.getItem('questionData') === undefined) {
+      localStorage.setItem('questionData', JSON.stringify(Questions))
+    } else {
+      const vals = JSON.parse(localStorage.getItem('questionData'))
+      Questions.forEach((question, i) => {
+        question.selected = vals[i].selected
+      })
+    }
+  }, [])
+
+
+
   const nextIndex = () => {
     setPrevBtnState('contained');
     setNextBtnState('contained');
-
+    setSubNow(false);
+    localStorage.setItem('questionData', JSON.stringify(Questions))
     if (index < Questions.length - 1) {
       setSelOption(Questions[index + 1].selected.length !== 0 ? Questions[index + 1].selected : '');
       setIndex(index + 1);
     }
     else if (index === Questions.length - 1) {
+      setSubNow(true);
       setNextBtnState('disabled');
     }
   }
@@ -56,6 +73,7 @@ const Quiz = () => {
   const prevIndex = () => {
     setPrevBtnState('contained');
     setNextBtnState('contained');
+    setSubNow(false);
 
     if (index > 0) {
       setSelOption(Questions[index - 1].selected.length !== 0 ? Questions[index - 1].selected : '')
@@ -66,9 +84,14 @@ const Quiz = () => {
     }
   }
 
+  const submit = () => {
+    // alert("Submit hogaya chutiye, ab jake mara!")
+    window.location.href = "https://youtube.com/watch?v=_lL2nlOzEQ8";
+  }
+
   return (
     <>
-      <Quiz_Timer />
+      <Quiz_Timer submit={submit} />
       <CssBaseline />
       <Container fixed>
         <Box sx={{
@@ -112,6 +135,22 @@ const Quiz = () => {
               opacity: '1'
             },
           }}>Next</Button>
+
+          {subNow ? (
+            <Button variant="contained" size="medium" className='next__button' onClick={submit} sx={{
+              position: 'absolute',
+              bottom: '30px',
+              right: '35px',
+              width: '90px',
+              fontFamily: 'Poppins',
+              fontWeight: 'bold',
+              background: 'rgba(255,0,0,0.7)',
+              ":hover": {
+                background: '#ff5656',
+              },
+            }}>Submit</Button>
+          ) : ""}
+
         </Box>
       </Container>
     </>

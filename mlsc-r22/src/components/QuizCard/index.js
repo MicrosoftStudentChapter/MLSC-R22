@@ -5,6 +5,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import styles from './quizcard.module.css';
+import { useEffect } from 'react';
 
 function QuizCard({ ques, setSelOption, selOption, active, setActive }) {
 
@@ -13,6 +14,13 @@ function QuizCard({ ques, setSelOption, selOption, active, setActive }) {
         setActive(e.target.value)
         ques.selected = e.target.value
     }
+
+    useEffect(() => {
+        if (ques.selected !== '') {
+            setSelOption(ques.selected)
+            setActive(ques.selected)
+        }
+    }, [])
 
     return (
         <>
@@ -41,7 +49,7 @@ function QuizCard({ ques, setSelOption, selOption, active, setActive }) {
                     name="radio-buttons-group"
                     onChange={handleChange}
                     defaultChecked={false}
-                    value={selOption}
+                    value={(ques.selected !== '') ? selOption : ques.selected}
                     sx={{
                         paddingLeft: '10px',
                     }}
@@ -50,7 +58,7 @@ function QuizCard({ ques, setSelOption, selOption, active, setActive }) {
                         <FormControlLabel className={opt === active && styles.active} value={opt} control={<Radio />} label={opt} sx={{
                             minWidth: '550px',
                             paddingTop: '10px',
-                            border: '1px solid white',
+                            border: '1.5px solid white',
                             marginBottom: '10px',
                             borderRadius: '5px',
                             fontFamily: 'Poppins',
