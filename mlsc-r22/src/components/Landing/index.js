@@ -36,8 +36,8 @@ export default function App() {
           LOGIN
         </button>
         {compShow && <Login />}
-        
-      <Timer />
+
+        <Timer />
       </div>
     </>
   );
