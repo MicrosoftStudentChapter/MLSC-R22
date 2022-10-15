@@ -15,7 +15,7 @@ export default function App() {
 
   return (
     <>
-      <div className="container">
+      <div className="container backbod">
         <svg viewBox="0 0 1250 200">
           <symbol id="s-text">
             <text text-anchor="middle" x="50%" y="80%">

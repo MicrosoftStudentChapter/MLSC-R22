@@ -77,7 +77,7 @@ const Waiting = () => {
                     <Container maxWidth="sm">
                       <Lottie animationData={Animation} style={{
                         width:'20rem',
-                        marginLeft:'9vw',
+                        marginLeft:'23%',
                         position:'relative'
                       }} />
                     </Container>
