@@ -3,8 +3,6 @@ import { useState, useEffect } from 'react';
 import styles from './quiztimer.module.css'
 
 const Quiz_Timer = () => {
-  const [days, setDays] = useState(0);
-  const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
 
@@ -12,9 +10,6 @@ const Quiz_Timer = () => {
 
   const getTime = () => {
     const time = Date.parse(deadline) - Date.now();
-
-    setDays(Math.floor(time / (1000 * 60 * 60 * 24)));
-    setHours(Math.floor((time / (1000 * 60 * 60)) % 24));
     setMinutes(Math.floor((time / 1000 / 60) % 60));
     setSeconds(Math.floor((time / 1000) % 60));
   };
@@ -27,18 +22,6 @@ const Quiz_Timer = () => {
 
   return (
     <div className={styles.timer} role="timer">
-      <div className={styles.col_4}>
-        <div className={styles.box}>
-          <p id="day">{days < 10 ? "0" + days : days}</p>
-          <span className={styles.text}>Days</span>
-        </div>
-      </div>
-      <div className={styles.col_4}>
-        <div className={styles.box}>
-          <p id="hour">{hours < 10 ? "0" + hours : hours}</p>
-          <span className={styles.text}>Hours</span>
-        </div>
-      </div>
       <div className={styles.col_4}>
         <div className={styles.box}>
           <p id="minute">{minutes < 10 ? "0" + minutes : minutes}</p>

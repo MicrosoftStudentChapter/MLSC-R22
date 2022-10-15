@@ -20,8 +20,9 @@ function QuizCard({ ques, setSelOption, selOption, active, setActive }) {
                 <FormLabel id="demo-radio-buttons-group-label"
                     sx={{
                         fontSize: '20px',
-                        width: '880px',
-                        height: '40vh',
+                        minWidth: '550px',
+                        margin: 'auto',
+                        height: '40%',
                         textJustify: 'inter-character',
                         color: 'white',
                         wordSpacing: '2px',
@@ -29,7 +30,8 @@ function QuizCard({ ques, setSelOption, selOption, active, setActive }) {
                             color: 'white',
                         },
                         fontFamily: 'Poppins',
-                        fontWeight: 'bolder'
+                        fontWeight: 'bold',
+                        overflow: 'scroll',
                     }}
                 >{ques.question}
                 </FormLabel>
@@ -46,13 +48,13 @@ function QuizCard({ ques, setSelOption, selOption, active, setActive }) {
                 >
                     {ques.options.map(opt => (
                         <FormControlLabel className={opt === active && styles.active} value={opt} control={<Radio />} label={opt} sx={{
-                            width: '880px',
+                            minWidth: '550px',
                             paddingTop: '10px',
                             border: '1px solid white',
                             marginBottom: '10px',
                             borderRadius: '5px',
                             fontFamily: 'Poppins',
-                            fontWeight: 'bolder'
+                            fontWeight: 'bold',
                         }} />
                     ))}
                 </RadioGroup>
