@@ -73,14 +73,16 @@ const Quiz = () => {
       <Container fixed>
         <Box sx={{
           bgcolor: '#14213d',
-          height: '85vh',
           color: 'white',
-          width: '920px',
+          minWidth: '600px',
+          width: '70%',
           margin: 'auto',
+          marginTop: '13%',
           position: 'relative',
-          padding: '20px',
+          padding: '2%',
           borderBottomLeftRadius: '20px',
           borderBottomRightRadius: '20px',
+          paddingBottom: '120px'
         }}
           className='quiz__container' >
 
@@ -88,7 +90,7 @@ const Quiz = () => {
           <Button variant={prevBtnState} size="medium" className='prev__button' onClick={prevIndex} sx={{
             position: 'absolute',
             bottom: '30px',
-            left: '30px',
+            left: '25px',
             width: '100px',
             color: 'white',
             fontFamily: 'Poppins',
@@ -102,7 +104,7 @@ const Quiz = () => {
           <Button variant={nextBtnState} size="medium" className='next__button' onClick={nextIndex} sx={{
             position: 'absolute',
             bottom: '30px',
-            right: '30px',
+            right: '35px',
             width: '90px',
             fontFamily: 'Poppins',
             fontWeight: 'bold',
