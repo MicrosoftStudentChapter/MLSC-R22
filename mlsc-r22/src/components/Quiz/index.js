@@ -42,11 +42,24 @@ const Quiz = () => {
     setActive(selOption);
   }, [selOption])
 
+  useEffect(() => {
+    if (localStorage.getItem('questionData') === null || localStorage.getItem('questionData') === undefined) {
+      localStorage.setItem('questionData', JSON.stringify(Questions))
+    } else {
+      const vals = JSON.parse(localStorage.getItem('questionData'))
+      Questions.forEach((question, i) => {
+        question.selected = vals[i].selected
+      })
+    }
+  }, [])
+
+
+
   const nextIndex = () => {
     setPrevBtnState('contained');
     setNextBtnState('contained');
     setSubNow(false);
-
+    localStorage.setItem('questionData', JSON.stringify(Questions))
     if (index < Questions.length - 1) {
       setSelOption(Questions[index + 1].selected.length !== 0 ? Questions[index + 1].selected : '');
       setIndex(index + 1);
