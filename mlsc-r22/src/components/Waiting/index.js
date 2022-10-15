@@ -45,7 +45,7 @@ const Waiting = () => {
         <div className={styles.wrapper} >
         
         
-          <Grid container spacing={2}>
+          <Grid container spacing={0}>
               <Grid item xs={6}>
                   <Item sx={{
                   //  width:'50vw',

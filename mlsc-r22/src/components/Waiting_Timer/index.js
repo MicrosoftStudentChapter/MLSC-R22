@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./Waiting_Timer.module.css";
+import {Redirect} from 'react-router-dom';
 
 const Timer = () => {
     const [days, setDays] = React.useState(0);
@@ -12,7 +13,9 @@ const Timer = () => {
     const getTime = () => {
       const time = Date.parse(deadline) - Date.now();    
       console.log(time);
-  
+			if(time < 0) {
+				return <Redirect to="/quiz" />
+			}
       setDays(Math.floor(time / (1000 * 60 * 60 * 24)));
       setHours(Math.floor((time / (1000 * 60 * 60)) % 24));
       setMinutes(Math.floor((time / 1000 / 60) % 60));
