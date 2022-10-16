@@ -55,7 +55,7 @@ const Quiz = () => {
   useEffect(() => {
     (async () => {
       const res = await fetch(
-        "https://us-central1-mlsc-recruitment-register.cloudfunctions.net/quiz/questions/2",
+        "https://us-central1-mlsc-recruitment-register.cloudfunctions.net/quiz/questions/3",
         {
           method: "GET",
           // headers: {
@@ -130,7 +130,7 @@ const Quiz = () => {
       email: cookie.user.email,
     };
     fetch(
-      "https://us-central1-mlsc-recruitment-register.cloudfunctions.net/quiz/questions/2",
+      "https://us-central1-mlsc-recruitment-register.cloudfunctions.net/quiz/questions/3",
       {
         method: "POST",
         body: JSON.stringify(response),
