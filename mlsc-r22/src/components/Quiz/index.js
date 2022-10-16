@@ -6,34 +6,33 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import "./quiz.module.css";
 import Quiz_Timer from "../Quiz_Timer";
-import axios from "axios";
 
-const Questions = [
-  {
-    question:
-      'int main()\n{\n        char *str="MLASSI";\n        printf("%d,%d\\n",strlen(str),sizeof(str));\n        return 0;\n}\n',
-    options: ["1", "2", "3", "4"],
-    selected: "",
-  },
-  {
-    question:
-      "Question 2: Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta fugiat necessitatibus nostrum suscipit quasi quo.",
-    options: ["1", "2", "3", "4"],
-    selected: "",
-  },
-  {
-    question:
-      "Question 3: Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis, expedita? Vel quae eos omnis ut hic vitae perferendis assumenda quos eius non! Id, mollitia autem.",
-    options: ["1", "2", "3", "4"],
-    selected: "",
-  },
-  {
-    question:
-      "Question 4: Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio excepturi velit consequuntur laborum cupiditate, iure ut, corporis iusto facere natus consectetur. Quod dolores repellendus fuga quasi eius alias dolorum facere. Ullam, deleniti et reprehenderit itaque debitis consequuntur eum sed similique! Voluptatem, esse? Dolorum, doloremque! Tempore dolores vero autem illum accusamus, illo perferendis ad itaque assumenda non atque laudantium ratione quas! Vel nostrum alias quos minima in similique molestiae, dolorem ratione rem eaque eius atque adipisci labore pariatur culpa dolorum debitis perspiciatis mollitia odit eum rerum magnam, tenetur quia dolor? Odio, tempora sunt perspiciatis asperiores error dolore sed nihil quas rem.",
-    options: ["1", "2", "3", "4"],
-    selected: "",
-  },
-];
+// const questions = [
+//   {
+//     question:
+//       'int main()\n{\n        char *str="MLASSI";\n        printf("%d,%d\\n",strlen(str),sizeof(str));\n        return 0;\n}\n',
+//     options: ["1", "2", "3", "4"],
+//     selected: "",
+//   },
+//   {
+//     question:
+//       "Question 2: Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta fugiat necessitatibus nostrum suscipit quasi quo.",
+//     options: ["1", "2", "3", "4"],
+//     selected: "",
+//   },
+//   {
+//     question:
+//       "Question 3: Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis, expedita? Vel quae eos omnis ut hic vitae perferendis assumenda quos eius non! Id, mollitia autem.",
+//     options: ["1", "2", "3", "4"],
+//     selected: "",
+//   },
+//   {
+//     question:
+//       "Question 4: Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio excepturi velit consequuntur laborum cupiditate, iure ut, corporis iusto facere natus consectetur. Quod dolores repellendus fuga quasi eius alias dolorum facere. Ullam, deleniti et reprehenderit itaque debitis consequuntur eum sed similique! Voluptatem, esse? Dolorum, doloremque! Tempore dolores vero autem illum accusamus, illo perferendis ad itaque assumenda non atque laudantium ratione quas! Vel nostrum alias quos minima in similique molestiae, dolorem ratione rem eaque eius atque adipisci labore pariatur culpa dolorum debitis perspiciatis mollitia odit eum rerum magnam, tenetur quia dolor? Odio, tempora sunt perspiciatis asperiores error dolore sed nihil quas rem.",
+//     options: ["1", "2", "3", "4"],
+//     selected: "",
+//   },
+// ];
 
 const Quiz = () => {
   const [index, setIndex] = useState(0);
@@ -44,20 +43,36 @@ const Quiz = () => {
   const [active, setActive] = useState("");
 
   const [subNow, setSubNow] = useState(false);
+  const [questions, setQuestions] = useState([]);
 
   useEffect(() => {
     setActive(selOption);
   }, [selOption]);
 
   useEffect(() => {
+    (async () => {
+      const res = await fetch(
+        "https://us-central1-mlsc-recruitment-register.cloudfunctions.net/quiz/questions/1",
+        {
+          method: "GET",
+          // headers: {
+          //   "Content-Type": "application/x-www-form-urlencoded",
+          // },
+          // body: bodyData,
+          redirect: "follow",
+        }
+      );
+      const data = await res.json();
+      console.log(data);
+    })();
     if (
       localStorage.getItem("questionData") === null ||
       localStorage.getItem("questionData") === undefined
     ) {
-      localStorage.setItem("questionData", JSON.stringify(Questions));
+      localStorage.setItem("questionData", JSON.stringify(questions));
     } else {
       const vals = JSON.parse(localStorage.getItem("questionData"));
-      Questions.forEach((question, i) => {
+      questions.forEach((question, i) => {
         question.selected = vals[i].selected;
       });
     }
@@ -67,15 +82,15 @@ const Quiz = () => {
     setPrevBtnState("contained");
     setNextBtnState("contained");
     setSubNow(false);
-    localStorage.setItem("questionData", JSON.stringify(Questions));
-    if (index < Questions.length - 1) {
+    localStorage.setItem("questionData", JSON.stringify(questions));
+    if (index < questions.length - 1) {
       setSelOption(
-        Questions[index + 1].selected.length !== 0
-          ? Questions[index + 1].selected
+        questions[index + 1].selected.length !== 0
+          ? questions[index + 1].selected
           : ""
       );
       setIndex(index + 1);
-    } else if (index === Questions.length - 1) {
+    } else if (index === questions.length - 1) {
       setSubNow(true);
       setNextBtnState("disabled");
     }
@@ -88,8 +103,8 @@ const Quiz = () => {
 
     if (index > 0) {
       setSelOption(
-        Questions[index - 1].selected.length !== 0
-          ? Questions[index - 1].selected
+        questions[index - 1].selected.length !== 0
+          ? questions[index - 1].selected
           : ""
       );
       setIndex(index - 1);
@@ -133,7 +148,7 @@ const Quiz = () => {
           className="quiz__container"
         >
           <QuizCard
-            ques={Questions[index]}
+            ques={questions[index]}
             setSelOption={setSelOption}
             selOption={selOption}
             active={active}
