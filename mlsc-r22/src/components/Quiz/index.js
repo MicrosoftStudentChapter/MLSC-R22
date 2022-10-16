@@ -86,16 +86,17 @@ const Quiz = () => {
   }
 
   const submit = () => {
+		console.log("Submitted")
     // axios.post("http://localhost:10000/data", { Questions })
     //   .then((res) => console.log(res))
     //   .catch((err) => console.log(err))
-    fetch("http://localhost:10000/data", {
-      method: "POST",
-      body: Questions
-    })
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err))
-    // window.location.href = "https://youtube.com/watch?v=_lL2nlOzEQ8";
+    // fetch("http://localhost:10000/data", {
+    //   method: "POST",
+    //   body: Questions
+    // })
+    //   .then((res) => console.log(res))
+    //   .catch((err) => console.log(err))
+    window.location.href = "https://youtube.com/watch?v=_lL2nlOzEQ8";
   }
 
   return (
