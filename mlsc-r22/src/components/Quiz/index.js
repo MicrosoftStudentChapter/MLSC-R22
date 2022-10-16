@@ -55,7 +55,7 @@ const Quiz = () => {
   useEffect(() => {
     (async () => {
       const res = await fetch(
-        "https://us-central1-mlsc-recruitment-register.cloudfunctions.net/quiz/questions/5",
+        "https://us-central1-mlsc-recruitment-register.cloudfunctions.net/quiz/questions/6",
         {
           method: "GET",
           // headers: {
@@ -130,7 +130,7 @@ const Quiz = () => {
       email: cookie.user.email,
     };
     fetch(
-      "https://us-central1-mlsc-recruitment-register.cloudfunctions.net/quiz/questions/5",
+      "https://us-central1-mlsc-recruitment-register.cloudfunctions.net/quiz/questions/6",
       {
         method: "POST",
         body: JSON.stringify(response),
@@ -144,7 +144,7 @@ const Quiz = () => {
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
     setTimeout(() => {
-      window.location.href = "https://youtube.com/watch?v=_lL2nlOzEQ8";
+      window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
     }, 2000);
   };
 

@@ -42,7 +42,7 @@ const Login = (props) => {
       console.log(email);
       bodyData.append("email", email);
       const res = await fetch(
-        "https://us-central1-mlsc-recruitment-register.cloudfunctions.net/quiz/verify/5",
+        "https://us-central1-mlsc-recruitment-register.cloudfunctions.net/quiz/verify/6",
         {
           method: "POST",
           headers: {
@@ -56,7 +56,7 @@ const Login = (props) => {
       if (data.status) {
         setCookie("user", data.data, {
           path: "/",
-          expires: new Date("16 October 2022 3:00:00 PM"), //End Time
+          expires: new Date("16 October 2022 3:40:00 PM"), //End Time
         });
         window.location.href = "/waiting";
       } else {
