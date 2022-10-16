@@ -13,7 +13,7 @@ export default function App(props) {
 
   return (
     <>
-      <div className="container">
+      <div className="container backbod">
         <svg viewBox="0 0 1250 200">
           <symbol id="s-text">
             <text text-anchor="middle" x="50%" y="80%">
@@ -30,10 +30,12 @@ export default function App(props) {
             <use xlinkHref="#s-text" className="text-copy"></use>
           </g>
         </svg>
-        <button onClick={handleClick} className="buttonlogin">
-          LOGIN
-        </button>
-        {compShow && <Login setData={props.setData} />}
+        {!compShow && (
+          <button onClick={handleClick} className="buttonlogin">
+            LOGIN
+          </button>
+        )}
+        {compShow && <Login />}
 
         <Timer />
       </div>

@@ -40,10 +40,23 @@ const Waiting = () => {
     <>
       <ThemeProvider theme={darkTheme}>
         <div className={styles.wrapper}>
-          <Grid container spacing={2}>
+          <Grid container spacing={0}>
             <Grid item xs={6}>
-              <Item>
-                <img src={bg} loading="lazy" alt="bg_img" />
+              <Item
+                sx={
+                  {
+                    //  width:'50vw',
+                    // height: '97.22vh',
+                    // background: 'rgba(255, 255, 255, .7)',
+                  }
+                }
+              >
+                <img
+                  src={bg}
+                  loading="lazy"
+                  alt="bg_img"
+                  className={styles.backImg}
+                />
                 <div className={styles.glass}>
                   <Waiting_Timer />
                 </div>
@@ -69,7 +82,7 @@ const Waiting = () => {
                     animationData={Animation}
                     style={{
                       width: "20rem",
-                      marginLeft: "9vw",
+                      marginLeft: "20%",
                       position: "relative",
                     }}
                   />
@@ -83,49 +96,48 @@ const Waiting = () => {
                 >
                   ALL THE BEST
                 </h5>
-
-                <h1
-                  style={{
-                    fontFamily: "Cormorant Garamond, serif",
-                    color: "#fff",
-                    letterSpacing: "1px",
-                    fontSize: "2.5rem",
+              </Item>
+              <Grid
+                sx={{
+                  width: "50vw",
+                  height: "100vh",
+                }}
+                item
+                xs={6}
+              >
+                <Item
+                  sx={{
+                    width: "48vw",
+                    height: "97.22vh",
                   }}
                 >
-                  We Will Start Very Soon
-                </h1>
+                  <Container maxWidth="sm">
+                    <Lottie
+                      animationData={Animation}
+                      style={{
+                        width: "20rem",
+                        marginLeft: "9vw",
+                        position: "relative",
+                      }}
+                    />
+                  </Container>
+                  <h5
+                    style={{
+                      fontFamily: "Nunito",
+                      color: "#fff",
+                      letterSpacing: "8px",
+                    }}
+                  >
+                    ALL THE BEST
+                  </h5>
 
-                <br />
-                <Link
-                  to="/quiz"
-                  style={{ textDecoration: "none", fontFamily: "Nunito" }}
-                >
-                  <Button variant="contained" endIcon={<SendIcon />}>
-                    Let's Roll
+                  <h1 className={styles.myText}>We Will Start Very Soon</h1>
+                  <br />
+                  <Button variant="contained" disabled>
+                    Please wait, You will be redirected soon
                   </Button>
-                </Link>
-
-                {/* <div className={styles.live}>
-
-                      <h5 style={{
-                        fontFamily:'Cormorant Garamond, roberto',
-                        color:'#fff',
-                        // letterSpacing:'8px'
-                      }}>Students live - 469
-                      </h5>
-
-                        
-                      <Lottie animationData={Live} style={{
-                          width:'8rem',
-                          marginLeft:'10vw'
-                        }} />
-                    
-                    </div> */}
-
-                {/* <Button variant="contained" disabled>
-                      Disabled
-                    </Button> */}
-              </Item>
+                </Item>
+              </Grid>
             </Grid>
           </Grid>
         </div>
