@@ -97,29 +97,6 @@ const Waiting = () => {
                      <Button variant="contained" disabled>
                        Please wait, You will be redirected soon
                      </Button>
-
-                    {/* <div className={styles.live}>
-
-                      <h5 style={{
-                        fontFamily:'Cormorant Garamond, roberto',
-                        color:'#fff',
-                        // letterSpacing:'8px'
-                      }}>Students live - 469
-                      </h5>
-
-                        
-                      <Lottie animationData={Live} style={{
-                          width:'8rem',
-                          marginLeft:'10vw'
-                        }} />
-                    
-                    </div> */}
-
-                    {/* <Button variant="contained" disabled>
-                      Disabled
-                    </Button> */}
-
-
                   </Item>
               </Grid>
           </Grid>

@@ -44,7 +44,7 @@ const Login = () => {
               width: 350,
               mx: "auto", // margin left & right
               my: 2, // margin top & botom
-              py: 3, // padding top & bottom
+              py: 1, // padding top & bottom
               px: 3, // padding left & right
               display: "flex",
               flexDirection: "column",
@@ -59,15 +59,9 @@ const Login = () => {
                 <b>Welcome!</b>
               </Typography>
               <Typography level="body2">
-                Enter you name and email id to continue.
+                Enter your email id to continue.
               </Typography>
             </div>
-            <TextField
-              name="FullName"
-              type="text"
-              placeholder="Full Name"
-              label="Full Name"
-            />
             <TextField
               // html input attribute
               name="email"
