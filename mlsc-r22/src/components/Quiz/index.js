@@ -39,6 +39,7 @@ const Quiz = () => {
 
   const [subNow, setSubNow] = useState(false);
 
+
   useEffect(() => {
     setActive(selOption);
   }, [selOption])
