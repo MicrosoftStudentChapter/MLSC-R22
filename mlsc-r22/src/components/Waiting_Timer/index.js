@@ -10,7 +10,7 @@ const Timer = () => {
   const [seconds, setSeconds] = React.useState(0);
   const [redirect, setRedirect] = useState(false);
 
-  const deadline = "16 October 2022 1:30:00 PM";
+  const deadline = "16 October 2022 2:10:00 PM"; //Start Time
 
   const getTime = () => {
     const time = Date.parse(deadline) - Date.now();
