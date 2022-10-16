@@ -32,12 +32,13 @@ export default function App() {
             <use xlinkHref="#s-text" className="text-copy"></use>
           </g>
         </svg>
-				{!compShow && <button onClick={handleClick} className="buttonlogin">
+
+        <Timer />
+        
+        {!compShow && <button onClick={handleClick} className="buttonlogin">
           LOGIN
         </button>}
         {compShow && <Login />}
-
-        <Timer />
       </div>
     </>
   );
