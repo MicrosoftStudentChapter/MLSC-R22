@@ -17,11 +17,11 @@ function QuizCard({ ques, setSelOption, selOption, active, setActive }) {
     }
 
     useEffect(() => {
-        if (ques.selected !== '') {
+        if (ques.selected !== '' || ques.selected !== undefined) {
             setSelOption(ques.selected)
             setActive(ques.selected)
         }
-    }, [])
+    }, [ques.selected])
 
     return (
         <>
@@ -46,14 +46,15 @@ function QuizCard({ ques, setSelOption, selOption, active, setActive }) {
                 </FormLabel>
 
                 {/* Sample Image */}
-                <img style={{
+                {ques.link !== '' && <img style={{
                     width: '80%',
                     margin: 'auto',
                     marginBottom: '3%'
                 }}
-                    src="https://bobbyhadz.com/images/blog/react-prevent-multiple-button-clicks/thumbnail.webp"
+                    src={ques.link !== '' ? ques.link : ''}
                     alt="car"
-                />
+                />}
+
 
                 <RadioGroup
                     aria-labelledby="demo-radio-buttons-group-label"
