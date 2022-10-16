@@ -74,10 +74,10 @@ const Login = (props) => {
           <Sheet
             sx={{
               width: 350,
-              mx: "auto",
-              my: 2,
-              py: 3,
-              px: 3,
+              mx: "auto", // margin left & right
+              my: 2, // margin top & botom
+              py: 1, // padding top & bottom
+              px: 3, // padding left & right
               display: "flex",
               flexDirection: "column",
               gap: 2,
@@ -91,16 +91,11 @@ const Login = (props) => {
                 Welcome!
               </Typography>
               <Typography level="body2">
-                Enter you name and email id to continue.
+                Enter your email id to continue.
               </Typography>
             </div>
             <TextField
-              name="FullName"
-              type="text"
-              placeholder="Full Name"
-              label="Full Name"
-            />
-            <TextField
+              // html input attribute
               name="email"
               type="email"
               placeholder="johndoe@email.com"

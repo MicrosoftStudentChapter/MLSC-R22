@@ -96,50 +96,17 @@ const Waiting = () => {
                 >
                   ALL THE BEST
                 </h5>
-              </Item>
-              <Grid
-                sx={{
-                  width: "50vw",
-                  height: "100vh",
-                }}
-                item
-                xs={6}
-              >
-                <Item
-                  sx={{
-                    width: "48vw",
-                    height: "97.22vh",
-                  }}
-                >
-                  <Container maxWidth="sm">
-                    <Lottie
-                      animationData={Animation}
-                      style={{
-                        width: "20rem",
-                        marginLeft: "9vw",
-                        position: "relative",
-                      }}
-                    />
-                  </Container>
-                  <h5
-                    style={{
-                      fontFamily: "Nunito",
-                      color: "#fff",
-                      letterSpacing: "8px",
-                    }}
-                  >
-                    ALL THE BEST
-                  </h5>
 
-                  <h1 className={styles.myText}>We Will Start Very Soon</h1>
-                  <br />
-                  <Button variant="contained" disabled>
-                    Please wait, You will be redirected soon
-                  </Button>
-                </Item>
-              </Grid>
+                <h1 className={styles.myText}>We Will Start Very Soon</h1>
+
+                <br />
+                <Button variant="contained" disabled>
+                  Please wait, You will be redirected soon
+                </Button>
+              </Item>
             </Grid>
           </Grid>
+          {/* </Grid> */}
         </div>
       </ThemeProvider>
     </>
