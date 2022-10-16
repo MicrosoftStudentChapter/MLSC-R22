@@ -77,7 +77,7 @@ const Waiting = () => {
                     <Container maxWidth="sm">
                       <Lottie animationData={Animation} style={{
                         width:'20rem',
-                        marginLeft:'23%',
+                        marginLeft:'20%',
                         position:'relative'
                       }} />
                     </Container>
@@ -89,23 +89,14 @@ const Waiting = () => {
 
                     
 
-                    <h1 style={{
-                      fontFamily: 'Cormorant Garamond, serif',
-                      color:'#fff',
-                      letterSpacing:'1px',
-                      fontSize:'2.5rem'
-                    }}>We Will Start Very Soon</h1>
+                    <h1 className={styles.myText}>We Will Start Very Soon</h1>
 
                     
                     
                     <br/>
-                    <Link to="/quiz" style={{ textDecoration: 'none' ,fontFamily:'Nunito' }}>
-                      <Button variant="contained" endIcon={<SendIcon />}>
-    
-                        Let's Roll
-                        
-                      </Button>
-                    </Link>
+                     <Button variant="contained" disabled>
+                       Please wait, You will be redirected soon
+                     </Button>
 
                     {/* <div className={styles.live}>
 
