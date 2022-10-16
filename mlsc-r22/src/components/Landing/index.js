@@ -4,14 +4,12 @@ import "./landing.css";
 import Login from "./login";
 // import exam from "./exam.json";
 
-
-export default function App() {
+export default function App(props) {
   const [compShow, setCompShow] = React.useState(false);
 
   const handleClick = () => {
     setCompShow(true);
   };
-
 
   return (
     <>
@@ -35,7 +33,7 @@ export default function App() {
         <button onClick={handleClick} className="buttonlogin">
           LOGIN
         </button>
-        {compShow && <Login />}
+        {compShow && <Login setData={props.setData} />}
 
         <Timer />
       </div>
@@ -43,14 +41,13 @@ export default function App() {
   );
 }
 
-
 const Timer = () => {
   const [days, setDays] = React.useState(0);
   const [hours, setHours] = React.useState(0);
   const [minutes, setMinutes] = React.useState(0);
   const [seconds, setSeconds] = React.useState(0);
 
-  const deadline = "16 October 2022 08:20:00 PM";
+  const deadline = "16 October 2022 12:00:00 PM";
 
   const getTime = () => {
     const time = Date.parse(deadline) - Date.now();

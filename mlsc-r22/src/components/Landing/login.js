@@ -4,14 +4,13 @@ import Sheet from "@mui/joy/Sheet";
 import Typography from "@mui/joy/Typography";
 import TextField from "@mui/joy/TextField";
 import Button from "@mui/joy/Button";
-import Link from "@mui/joy/Link";
 import "./landing.css";
+import { useCookies } from "react-cookie";
+
 function ModeToggle() {
   const { mode, setMode } = useColorScheme();
   const [mounted, setMounted] = React.useState(false);
 
-  // necessary for server-side rendering
-  // because mode is undefined on the server
   React.useEffect(() => {
     setMounted(true);
   }, []);
@@ -30,22 +29,55 @@ function ModeToggle() {
     </Button>
   );
 }
-const login = () => {
-  window.location.href = window.location.href + "waiting"
-}
-const Login = () => {
+
+const Login = (props) => {
+  const [cookies, setCookie] = useCookies(["session"]);
+  if (cookies.user) {
+    window.location.href = "/waiting";
+  }
+  const [email, setEmail] = React.useState("");
+  const submitHandler = async () => {
+    try {
+      const bodyData = new URLSearchParams();
+      console.log(email);
+      bodyData.append("email", email);
+      const res = await fetch(
+        "https://us-central1-mlsc-recruitment-register.cloudfunctions.net/quiz/verify/1",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          body: bodyData,
+          redirect: "follow",
+        }
+      );
+      const data = await res.json();
+      if (data.status) {
+        setCookie("user", data.data, {
+          path: "/",
+          expires: new Date("16 October 2022 12:25:00 PM"),
+        });
+        window.location.href = "/waiting";
+      } else {
+        console.log("invalid");
+        return;
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <div className="glass">
       <CssVarsProvider>
         <main>
-          {/* <ModeToggle /> */}
           <Sheet
             sx={{
               width: 350,
-              mx: "auto", // margin left & right
-              my: 2, // margin top & botom
-              py: 3, // padding top & bottom
-              px: 3, // padding left & right
+              mx: "auto",
+              my: 2,
+              py: 3,
+              px: 3,
               display: "flex",
               flexDirection: "column",
               gap: 2,
@@ -56,7 +88,7 @@ const Login = () => {
           >
             <div>
               <Typography level="h4" component="h1">
-                <b>Welcome!</b>
+                Welcome!
               </Typography>
               <Typography level="body2">
                 Enter you name and email id to continue.
@@ -69,14 +101,16 @@ const Login = () => {
               label="Full Name"
             />
             <TextField
-              // html input attribute
               name="email"
               type="email"
               placeholder="johndoe@email.com"
-              // pass down to FormLabel as children
               label="Email"
+              required
+              onChange={(e) => setEmail(e.target.value)}
             />
-            <Button sx={{ mt: 1 /* margin top */ }} onClick={login}>Submit</Button>
+            <Button button sx={{ mt: 1 }} onClick={submitHandler}>
+              Submit
+            </Button>
           </Sheet>
         </main>
       </CssVarsProvider>
