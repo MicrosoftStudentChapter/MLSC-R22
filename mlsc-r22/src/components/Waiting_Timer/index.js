@@ -10,13 +10,13 @@ const Timer = () => {
   const [seconds, setSeconds] = React.useState(0);
   const [redirect, setRedirect] = useState(false);
 
-  const deadline = "16 October 2022 10:00:00 AM";
+  const deadline = "16 October 2022 1:05:00 PM";
 
   const getTime = () => {
     const time = Date.parse(deadline) - Date.now();
     console.log(time);
     if (time <= 0) {
-      setRedirect(true);
+      window.location.href = "/quiz";
       return;
     }
     setDays(Math.floor(time / (1000 * 60 * 60 * 24)));

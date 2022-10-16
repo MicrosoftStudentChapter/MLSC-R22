@@ -42,7 +42,7 @@ const Login = (props) => {
       console.log(email);
       bodyData.append("email", email);
       const res = await fetch(
-        "https://us-central1-mlsc-recruitment-register.cloudfunctions.net/quiz/verify/1",
+        "https://us-central1-mlsc-recruitment-register.cloudfunctions.net/quiz/verify/2",
         {
           method: "POST",
           headers: {

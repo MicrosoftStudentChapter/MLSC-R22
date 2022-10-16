@@ -6,7 +6,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import "./quiz.module.css";
 import Quiz_Timer from "../Quiz_Timer";
-import { useCookies } from 'react-cookie';
+import { useCookies } from "react-cookie";
 // const questions = [
 //   {
 //     question:
@@ -43,9 +43,11 @@ const Quiz = () => {
   const [active, setActive] = useState("");
 
   const [subNow, setSubNow] = useState(false);
-  const [questions, setQuestions] = useState([{ "question": "Loading", "options": [1, 2, 3, 4], "link": "" }]);
+  const [questions, setQuestions] = useState([
+    { question: "Loading", options: [1, 2, 3, 4], link: "" },
+  ]);
 
-  const [cookie, setCookie] = useCookies(['users']);
+  const [cookie, setCookie] = useCookies(["users"]);
   useEffect(() => {
     setActive(selOption);
   }, [selOption]);
@@ -53,7 +55,7 @@ const Quiz = () => {
   useEffect(() => {
     (async () => {
       const res = await fetch(
-        "https://us-central1-mlsc-recruitment-register.cloudfunctions.net/quiz/questions/1",
+        "https://us-central1-mlsc-recruitment-register.cloudfunctions.net/quiz/questions/2",
         {
           method: "GET",
           // headers: {
@@ -66,8 +68,7 @@ const Quiz = () => {
       if (!res.ok) {
         const message = `An error has occured: ${res.status}`;
         throw new Error(message);
-      }
-      else {
+      } else {
         const data = await res.json();
         setQuestions(data.data);
 
@@ -83,7 +84,6 @@ const Quiz = () => {
           });
         }
       }
-
     })();
   }, []);
 
@@ -94,7 +94,8 @@ const Quiz = () => {
     localStorage.setItem("questionData", JSON.stringify(questions));
     if (index < questions.length - 1) {
       setSelOption(
-        questions[index + 1].selected !== '' || questions[index - 1].selected !== undefined
+        questions[index + 1].selected !== "" ||
+          questions[index - 1].selected !== undefined
           ? questions[index + 1].selected
           : ""
       );
@@ -112,7 +113,8 @@ const Quiz = () => {
 
     if (index > 0) {
       setSelOption(
-        questions[index - 1].selected !== '' || questions[index - 1].selected !== undefined
+        questions[index - 1].selected !== "" ||
+          questions[index - 1].selected !== undefined
           ? questions[index - 1].selected
           : ""
       );
@@ -125,20 +127,25 @@ const Quiz = () => {
   const submit = () => {
     const response = {
       responses: questions,
-      email: cookie.user.email
-    }
-    fetch("https://us-central1-mlsc-recruitment-register.cloudfunctions.net/quiz/questions/1", {
-      method: 'POST',
-      body: JSON.stringify(response),
-      headers: {
-        "Content-type": 'application/json',
-        "Access-Control-Allow-Origin": '*',
-      },
-      redirect: 'follow'
-    })
+      email: cookie.user.email,
+    };
+    fetch(
+      "https://us-central1-mlsc-recruitment-register.cloudfunctions.net/quiz/questions/2",
+      {
+        method: "POST",
+        body: JSON.stringify(response),
+        headers: {
+          "Content-type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+        redirect: "follow",
+      }
+    )
       .then((res) => console.log(res))
-      .catch((err) => console.log(err))
-    // window.location.href = "https://youtube.com/watch?v=_lL2nlOzEQ8";
+      .catch((err) => console.log(err));
+    setTimeout(() => {
+      window.location.href = "https://youtube.com/watch?v=_lL2nlOzEQ8";
+    }, 2000);
   };
 
   return (
