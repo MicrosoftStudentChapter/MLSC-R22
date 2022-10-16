@@ -6,7 +6,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import "./quiz.module.css";
 import Quiz_Timer from "../Quiz_Timer";
-
+import { useCookies } from 'react-cookie';
 // const questions = [
 //   {
 //     question:
@@ -43,8 +43,9 @@ const Quiz = () => {
   const [active, setActive] = useState("");
 
   const [subNow, setSubNow] = useState(false);
-  const [questions, setQuestions] = useState([]);
+  const [questions, setQuestions] = useState([{ "question": "Loading", "options": [1, 2, 3, 4], "link": "" }]);
 
+  const [cookie, setCookie] = useCookies(['users']);
   useEffect(() => {
     setActive(selOption);
   }, [selOption]);
@@ -62,20 +63,28 @@ const Quiz = () => {
           redirect: "follow",
         }
       );
-      const data = await res.json();
-      console.log(data);
+      if (!res.ok) {
+        const message = `An error has occured: ${res.status}`;
+        throw new Error(message);
+      }
+      else {
+        const data = await res.json();
+        setQuestions(data.data);
+
+        if (
+          localStorage.getItem("questionData") === null ||
+          localStorage.getItem("questionData") === undefined
+        ) {
+          localStorage.setItem("questionData", JSON.stringify(questions));
+        } else {
+          const vals = JSON.parse(localStorage.getItem("questionData"));
+          questions.forEach((question, i) => {
+            question.selected = vals[i].selected;
+          });
+        }
+      }
+
     })();
-    if (
-      localStorage.getItem("questionData") === null ||
-      localStorage.getItem("questionData") === undefined
-    ) {
-      localStorage.setItem("questionData", JSON.stringify(questions));
-    } else {
-      const vals = JSON.parse(localStorage.getItem("questionData"));
-      questions.forEach((question, i) => {
-        question.selected = vals[i].selected;
-      });
-    }
   }, []);
 
   const nextIndex = () => {
@@ -85,7 +94,7 @@ const Quiz = () => {
     localStorage.setItem("questionData", JSON.stringify(questions));
     if (index < questions.length - 1) {
       setSelOption(
-        questions[index + 1].selected.length !== 0
+        questions[index + 1].selected !== '' || questions[index - 1].selected !== undefined
           ? questions[index + 1].selected
           : ""
       );
@@ -103,7 +112,7 @@ const Quiz = () => {
 
     if (index > 0) {
       setSelOption(
-        questions[index - 1].selected.length !== 0
+        questions[index - 1].selected !== '' || questions[index - 1].selected !== undefined
           ? questions[index - 1].selected
           : ""
       );
@@ -114,17 +123,22 @@ const Quiz = () => {
   };
 
   const submit = () => {
-    console.log("Submitted");
-    // axios.post("http://localhost:10000/data", { Questions })
-    //   .then((res) => console.log(res))
-    //   .catch((err) => console.log(err))
-    // fetch("http://localhost:10000/data", {
-    //   method: "POST",
-    //   body: Questions
-    // })
-    //   .then((res) => console.log(res))
-    //   .catch((err) => console.log(err))
-    window.location.href = "https://youtube.com/watch?v=_lL2nlOzEQ8";
+    const response = {
+      responses: questions,
+      email: cookie.user.email
+    }
+    fetch("https://us-central1-mlsc-recruitment-register.cloudfunctions.net/quiz/questions/1", {
+      method: 'POST',
+      body: JSON.stringify(response),
+      headers: {
+        "Content-type": 'application/json',
+        "Access-Control-Allow-Origin": '*',
+      },
+      redirect: 'follow'
+    })
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err))
+    // window.location.href = "https://youtube.com/watch?v=_lL2nlOzEQ8";
   };
 
   return (
@@ -137,7 +151,7 @@ const Quiz = () => {
             bgcolor: "#14213d",
             color: "white",
             minWidth: "600px",
-            width: "70%",
+            width: "50%",
             margin: "auto",
             position: "relative",
             padding: "2%",
@@ -175,7 +189,6 @@ const Quiz = () => {
           >
             Previous
           </Button>
-
           <Button
             variant={nextBtnState}
             size="medium"
