@@ -56,7 +56,7 @@ const Login = (props) => {
       if (data.status) {
         setCookie("user", data.data, {
           path: "/",
-          expires: new Date("16 October 2022 12:25:00 PM"),
+          expires: new Date("16 October 2022 1:05:00 PM"),
         });
         window.location.href = "/waiting";
       } else {
