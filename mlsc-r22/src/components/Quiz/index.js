@@ -43,6 +43,7 @@ const Quiz = () => {
   const [active, setActive] = useState("");
 
   const [subNow, setSubNow] = useState(false);
+
   const [questions, setQuestions] = useState([
     { question: "Loading", options: [1, 2, 3, 4], link: "" },
   ]);
@@ -124,11 +125,44 @@ const Quiz = () => {
     }
   };
 
-  const submit = () => {
-    const response = {
-      responses: questions,
-      email: cookie.user.email,
-    };
+  const submit = (autosub) => 
+  {
+    if(autosub)
+    {
+      console.log(localStorage.getItem("questionData"));
+      /*const response = {
+        responses: localStorage.getItem("questionData", JSON.parse(questions)),
+        email: cookie.user.email,
+      };
+      fetch(
+        "https://us-central1-mlsc-recruitment-register.cloudfunctions.net/quiz/questions/6",
+        {
+          method: "POST",
+          body: JSON.stringify(response),
+          headers: {
+            "Content-type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+          },
+          redirect: "follow",
+        }
+      )
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
+      setTimeout(() => {
+        window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+      }, 2000);
+      */
+    }
+    
+    else
+    {
+      console.log(questions);
+      /*
+      const response = {
+        responses: questions,
+        email: cookie.user.email,
+      };
+
     fetch(
       "https://us-central1-mlsc-recruitment-register.cloudfunctions.net/quiz/questions/6",
       {
@@ -141,11 +175,13 @@ const Quiz = () => {
         redirect: "follow",
       }
     )
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
-    setTimeout(() => {
-      window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
-    }, 2000);
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
+      setTimeout(() => {
+        window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+      }, 2000);
+      */
+  }
   };
 
   return (
