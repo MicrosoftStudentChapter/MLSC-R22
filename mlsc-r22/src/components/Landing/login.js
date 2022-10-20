@@ -4,6 +4,8 @@ import Sheet from "@mui/joy/Sheet";
 import Typography from "@mui/joy/Typography";
 import TextField from "@mui/joy/TextField";
 import Button from "@mui/joy/Button";
+import { Alert, CircularProgress } from "@mui/joy";
+import { Snackbar } from "@mui/material";
 import "./landing.css";
 import { useCookies } from "react-cookie";
 
@@ -32,6 +34,9 @@ function ModeToggle() {
 
 const Login = (props) => {
   const [cookies, setCookie] = useCookies(["session"]);
+  const [error, setError] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
+
   if (cookies.user) {
     window.location.href = "/waiting";
   }
@@ -41,8 +46,9 @@ const Login = (props) => {
       const bodyData = new URLSearchParams();
       console.log(email);
       bodyData.append("email", email);
+      setLoading(true);
       const res = await fetch(
-        "https://us-central1-mlsc-recruitment-register.cloudfunctions.net/quiz/verify/6",
+        "https://us-central1-mlsc-recruitment-register.cloudfunctions.net/quiz/verify/online",
         {
           method: "POST",
           headers: {
@@ -54,15 +60,20 @@ const Login = (props) => {
       );
       const data = await res.json();
       if (data.status) {
-        setCookie("user", data.data, {
+        setCookie("user", data.email, {
           path: "/",
-          expires: new Date("16 October 2022 3:40:00 PM"), //End Time
+          expires: new Date("20 October 2022 11:15:00 PM"), //End Time
         });
         window.location.href = "/waiting";
       } else {
+        setError(true);
+        setTimeout(() => {
+          setError(false);
+        }, 3000);
         console.log("invalid");
-        return;
       }
+      setLoading(false);
+      return;
     } catch (err) {
       console.log(err);
     }
@@ -104,11 +115,22 @@ const Login = (props) => {
               onChange={(e) => setEmail(e.target.value)}
             />
             <Button button sx={{ mt: 1 }} onClick={submitHandler}>
-              Submit
+              {loading ? (
+                <CircularProgress color="info" variant="plain" />
+              ) : (
+                "Submit"
+              )}
             </Button>
           </Sheet>
         </main>
       </CssVarsProvider>
+      {error ? (
+        <Snackbar open={error}>
+          <Alert variant="soft" color="danger" size="lg">
+            Invalid Email
+          </Alert>
+        </Snackbar>
+      ) : null}
     </div>
   );
 };

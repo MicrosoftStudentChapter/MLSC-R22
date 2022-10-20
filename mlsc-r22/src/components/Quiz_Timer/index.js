@@ -1,6 +1,5 @@
 import React from "react";
 import { useState, useEffect } from "react";
-// import { useTimer } from 'react-timer-hook';
 import styles from "./quiztimer.module.css";
 
 const Quiz_Timer = ({ submit }) => {
@@ -8,22 +7,25 @@ const Quiz_Timer = ({ submit }) => {
   const [seconds, setSeconds] = useState(0);
   const [checked, setChecked] = useState(false);
 
-  const deadline = new Date(Date.now() + 10 * 60000);
-
+  let deadline = new Date(Date.now() + 15 * 60000);
+  let interval;
   const getTime = async () => {
     if (
       (localStorage.getItem("startTime") !== null ||
         localStorage.getItem("startTime") !== undefined) &&
       !checked
     ) {
-      var deadline = new Date(
-        parseInt(localStorage.getItem("startTime", Date.now())) + 10 * 60000
+      deadline = new Date(
+        parseInt(localStorage.getItem("startTime", Date.now())) + 15 * 60000
       );
       setChecked(true);
     }
     const time = Date.parse(deadline) - Date.now();
+    console.log(time);
     if (time <= 0) {
       await submit(true);
+      clearInterval(interval);
+      return;
     } else {
       setMinutes(Math.floor((time / 1000 / 60) % 60));
       setSeconds(Math.floor((time / 1000) % 60));
@@ -37,7 +39,7 @@ const Quiz_Timer = ({ submit }) => {
     ) {
       localStorage.setItem("startTime", Date.now());
     }
-    const interval = setInterval(() => getTime(deadline), 1000);
+    interval = setInterval(() => getTime(deadline), 1000);
     if (minutes === 0) return () => clearInterval(interval);
   }, []);
 
