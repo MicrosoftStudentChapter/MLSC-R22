@@ -8,7 +8,7 @@ const Quiz_Timer = ({ submit }) => {
   const [seconds, setSeconds] = useState(0);
   const [checked, setChecked] = useState(false);
 
-  const deadline = new Date(Date.now() + 15 * 60000);
+  const deadline = new Date(Date.now() + 10 * 60000);
 
   const getTime = async () => {
     if (
@@ -17,13 +17,13 @@ const Quiz_Timer = ({ submit }) => {
       !checked
     ) {
       var deadline = new Date(
-        parseInt(localStorage.getItem("startTime", Date.now())) + 15 * 60000
+        parseInt(localStorage.getItem("startTime", Date.now())) + 10 * 60000
       );
       setChecked(true);
     }
     const time = Date.parse(deadline) - Date.now();
     if (time <= 0) {
-      // await submit();
+      await submit(true);
     } else {
       setMinutes(Math.floor((time / 1000 / 60) % 60));
       setSeconds(Math.floor((time / 1000) % 60));
