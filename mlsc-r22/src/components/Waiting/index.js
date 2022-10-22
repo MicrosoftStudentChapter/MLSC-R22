@@ -3,7 +3,6 @@ import Grid from "@mui/system/Unstable_Grid";
 import styled from "@mui/system/styled";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import Button from "@mui/material/Button";
-import SendIcon from "@mui/icons-material/Send";
 
 import Lottie from "lottie-react";
 import Animation from "./assets/animation.json";

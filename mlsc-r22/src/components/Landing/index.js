@@ -1,8 +1,6 @@
 import * as React from "react";
 import "./landing.css";
-// import Lottie from "lottie-react";
 import Login from "./login";
-// import exam from "./exam.json";
 
 export default function App(props) {
   const [compShow, setCompShow] = React.useState(false);
